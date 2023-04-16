@@ -4,12 +4,13 @@ import { toast } from "react-toastify";
 
 interface VideoPlayerProps {
   videoSrc: string;
+  onError?: () => void;
 }
 
-const VideoPlayer2: React.FC<VideoPlayerProps> = ({ videoSrc }) => {
-  const handlePlayerError = () => {
-    toast.error("Error streaming video", { autoClose: 1000 });
-  };
+const VideoPlayer2: React.FC<VideoPlayerProps> = ({ videoSrc, onError }) => {
+  // const handlePlayerError = () => {
+  //   toast.error("Error streaming video", { autoClose: 1000 });
+  // };
 
   return (
     <div className="player-wrapper">
@@ -19,7 +20,7 @@ const VideoPlayer2: React.FC<VideoPlayerProps> = ({ videoSrc }) => {
         controls
         width="100%"
         height="500px"
-        onError={handlePlayerError}
+        onError={onError}
       />
     </div>
   );
