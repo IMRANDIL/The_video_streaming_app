@@ -1,8 +1,9 @@
-import { useState } from "react";
-import "./App.css";
+import React from "react";
+import VideoPlayer from "./components/VideoPlayer";
 
-function App() {
-  <h1>Hi ali</h1>;
-}
+const App = () => {
+  const videoSrc = "http://your-backend.com/stream";
+  return <VideoPlayer videoSrc={videoSrc} />;
+};
 
 export default App;
