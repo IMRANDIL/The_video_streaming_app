@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import styled from "styled-components";
 
 interface VideoPlayerProps {
@@ -11,16 +11,29 @@ const StyledVideo = styled.video`
 `;
 
 const VideoPlayer: React.FC<VideoPlayerProps> = ({ videoSrc }) => {
+  const [userInteracted, setUserInteracted] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+
+  const handleClick = () => {
+    if (videoRef.current && !userInteracted) {
+      videoRef.current.play();
+      setUserInteracted(true);
+    }
+  };
 
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.src = videoSrc;
-      videoRef.current.play();
     }
   }, [videoSrc]);
 
-  return <StyledVideo ref={videoRef} controls />;
+  return (
+    <StyledVideo
+      ref={videoRef}
+      onClick={handleClick}
+      controls={!userInteracted}
+    />
+  );
 };
 
 export default VideoPlayer;
